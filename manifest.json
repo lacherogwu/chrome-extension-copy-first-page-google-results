@@ -1,6 +1,6 @@
 {
-	"name": "Getting Started Example",
-	"description": "Build an Extension!",
+	"name": "Copy first google page results",
+	"description": "Copy to clipboard first page google results",
 	"version": "1.0",
 	"manifest_version": 3,
 	"action": {
