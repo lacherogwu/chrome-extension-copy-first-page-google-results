@@ -1,14 +1,20 @@
 const formEl = document.querySelector('form');
 const inputEl = document.querySelector('#query');
 
-async function getResults() {
+function sleep(ms = 1) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getResults() {
+	for (let i = 0; i < 10000; i++) {
+		console.log('something' + i);
+	}
+	return ['cook', 'cook'];
 	const containerEl = document.querySelector('#rso');
 
 	const allEls = containerEl.querySelectorAll('div link[rel=prerender]');
 	console.log(allEls);
 	console.log(containerEl);
-
-	return ['cook', 'cook'];
 }
 
 async function handleFormSubmit(e) {
@@ -18,13 +24,12 @@ async function handleFormSubmit(e) {
 		url: `https://www.google.com/search?q=${inputEl.value ?? ''}`,
 	});
 
-	console.log(tab);
-	await new Promise(resolve => setTimeout(resolve, 2000));
-	// await new Promise(resolve => setTimeout(resolve, 2000));
+	await sleep();
+
 	const data = await chrome.scripting.executeScript({
 		target: { tabId: tab.id },
 		func: getResults,
 	});
-	console.log(data);
+	console.log(data[0].result);
 }
 formEl.addEventListener('submit', handleFormSubmit);
